@@ -17,6 +17,5 @@ The approach here is:
 ## Solution Set up
  - Create virtual environment
  - Run `pip freeze > requirements.txt` in the virtual environment to install dependencies
- - Create folder in the solution root and call it `models`
  - Download both `Phi-3-mini-128k-instruct.Q6_K.gguf` and `bge-small-en-v1.5-q4_k_m.gguf` into the models folder.
-  - The Phi 3 model with be used for text generation while the BGE model will be used to create the document embeddings. 
+  - The Phi 3 model is used to generate text. The BGE model is used to create the document embeddings. 

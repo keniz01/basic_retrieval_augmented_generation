@@ -1,0 +1,1 @@
+https://huggingface.co/AbhishekVenkatachalam06/Phi-3-mini-128k-instruct-Q6_K-GGUF/resolve/main/phi-3-mini-128k-instruct.Q6_K.gguf?download=true
