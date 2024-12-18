@@ -17,16 +17,19 @@ embed_model=Llama(
   verbose=False,
   pooling_type=LLAMA_POOLING_TYPE_NONE
 )
- 
-file = open('document.txt', 'r')
-data = file.read()
-documents=data.split(".")
 
-doc_embeddings = [embed_model.embed(document)[1] for _, document in enumerate(documents)]    
+with open('document.txt', 'r') as file:
+  data=file.read()
+  documents=data.split(".")
+
+def generate_document_embeddings():
+    doc_embeddings = [embed_model.embed(document)[1] for _, document in enumerate(documents)] 
+    return doc_embeddings   
  
 def generate_context(user_query: str) -> str:
 
   query_embeddings=embed_model.embed(user_query)[1]
+  doc_embeddings=generate_document_embeddings()
   similarities=np.dot(doc_embeddings, query_embeddings)
   
   top_3_idx=np.argsort(similarities, axis=0)[-3:][::1].tolist()
@@ -92,13 +95,11 @@ def generate_query_response(user_prompt: str):
 
 if __name__ == "__main__":
 
-  print("\nAsk a question or enter 'quit' to exit: ", end='')
-  user_query = input()
+  user_query = input("Ask a question or enter 'quit' to exit: ")
   
   while user_query.capitalize() != 'quit'.capitalize():
     user_prompt=generate_user_prompt(user_query)
     generate_query_response(user_prompt)    
-    print("Question: ", end='')
-    user_query = input()
+    user_query = input("Ask a question or enter 'quit' to exit: ")
 
   print()
